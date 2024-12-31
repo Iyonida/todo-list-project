@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My ToDo List App</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <h1 class="heading">My To<span class="heading--color">Do</span> List</h1>
+    <div class="app">
+      <form action="" class="form">
+        <input type="text" class="form__input" placeholder="Add a new task" />
+        <button class="form__btn btn">+</button>
+      </form>
+
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item navigation__item--active">All</li>
+          <li class="navigation__item">Pending</li>
+          <li class="navigation__item">Completed</li>
+        </ul>
+
+        <button class="navigation__btn btn">Clear All</button>
+      </nav>
+
+      <ul class="task">
+        <li class="task__row">
+          <div class="task__checkbox">
+            <input type="checkbox" class="task__checkbox-input" />
+            <div class="task__checkbox-custom"></div>
+          </div>
+          <p class="task__label">Go for a run.</p>
+          <div class="task__btn">
+            <button class="task__btn--edit btn">Edit</button>
+            <button class="task__btn--delete btn">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="overlay hidden">
+      <div class="edit-popup">
+        <div class="edit-popup__btn--cancel">&times;</div>
+        <form action="" class="edit-popup__form">
+          <input type="text" class="edit-popup__input" />
+          <button class="edit-popup__btn--apply btn">Apply</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
