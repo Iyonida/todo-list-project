@@ -45,6 +45,8 @@ class ToDoApp {
     applyBtn.addEventListener("click", this._applyEdit.bind(this));
 
     closeBtn.addEventListener("click", this._closePopup.bind(this));
+
+    clrBtn.addEventListener("click", this._clearLocalStorage.bind(this));
   }
 
   _renderEntries(list) {
@@ -131,13 +133,14 @@ class ToDoApp {
       });
       this.#toDoList.pop(deleteId);
 
-      console.log(this.#toDoList);
-
       // Display updated array
       this._renderOptions();
 
       // Decrease count
       this.count--;
+
+      // add to localstorage
+      this._setLocalStorage();
     }
   }
 
@@ -154,8 +157,6 @@ class ToDoApp {
       // Retrieve item from array
       item = this.#toDoList.find((entry) => entry.id === id);
       editInputField.value = item.task;
-
-      // console.log(item.task);
     }
   }
 
@@ -174,7 +175,9 @@ class ToDoApp {
 
     // Display updated array
     this._renderOptions();
-    console.log(this.#toDoList);
+
+    // add to localstorage
+    this._setLocalStorage();
   }
 
   _closePopup() {
@@ -189,7 +192,6 @@ class ToDoApp {
 
       // Change the status of the selected entry to completed
       this.#toDoList.find((entry) => entry.id === id).status = "completed";
-      console.log(this.#toDoList);
 
       // Display the updated entries
       this._renderOptions();
@@ -247,18 +249,23 @@ class ToDoApp {
 
   _setLocalStorage() {
     localStorage.setItem("toDoList", JSON.stringify(this.#toDoList));
-
-    console.log(localStorage);
   }
 
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem("toDoList"));
-    console.log(data);
 
     if (!data) return;
 
     this.#toDoList = data;
     this._renderEntries(this.#toDoList);
   }
+  _clearLocalStorage() {
+    localStorage.clear();
+
+    this.#toDoList = [];
+
+    this._renderEntries(this.#toDoList);
+  }
 }
+
 const app = new ToDoApp();
